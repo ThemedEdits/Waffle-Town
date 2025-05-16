@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Waffle Town - Where Every Bite is Happiness</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #ffd166;
+        --secondary: #ef476f;
+        --accent: #06d6a0;
+        --dark: #073b4c;
+        --light: #fffcf9;
+        --brown: #8b4513;
+        --cream: #fff5e1;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--cream);
+        color: var(--dark);
+        overflow-x: hidden;
+      }
+
+      /* Navbar */
+      .navbar {
+        background-color: var(--light);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        padding: 1rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .navbar.scrolled {
+        padding: 0.5rem 5%;
+        background-color: rgba(255, 252, 249, 0.95);
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 50px;
+        margin-right: 10px;
+      }
+
+      .logo h1 {
+        font-family: "Dancing Script", cursive;
+        color: var(--brown);
+        font-size: 1.8rem;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 600;
+        transition: color 0.3s;
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: var(--secondary);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--secondary);
+        transition: width 0.3s;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: var(--dark);
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+          url("https://images.unsplash.com/photo-1558584724-0e4d32ca55a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80")
+            no-repeat center center/cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        padding-top: 80px;
+      }
+
+      .hero h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: 5rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        animation: fadeInDown 1s ease;
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        max-width: 800px;
+        animation: fadeInUp 1s ease;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        animation: fadeIn 1.5s ease;
+      }
+
+      .btn {
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: var(--dark);
+      }
+
+      .btn-primary:hover {
+        background-color: transparent;
+        border-color: var(--primary);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        border-color: white;
+        color: white;
+      }
+
+      .btn-secondary:hover {
+        background-color: white;
+        color: var(--dark);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* About Section */
+      .section {
+        padding: 5rem 10%;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .section-title h2 {
+        font-family: "Dancing Script", cursive;
+        font-size: 3rem;
+        color: var(--brown);
+        display: inline-block;
+      }
+
+      .section-title h2::after {
+        content: "";
+        position: absolute;
+        width: 80px;
+        height: 3px;
+        background-color: var(--primary);
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-text h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+      }
+
+      .about-text p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        color: #555;
+      }
+
+      .about-image {
+        flex: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .about-image:hover {
+        transform: scale(1.03);
+      }
+
+      .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Menu Section */
+      .menu {
+        background-color: var(--light);
+      }
+
+      .menu-tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .tab-btn {
+        padding: 0.8rem 1.5rem;
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: var(--dark);
+      }
+
+      .tab-btn.active,
+      .tab-btn:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .menu-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, -1fr));
+        gap: 2rem;
+      }
+
+      .menu-category {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .menu-category.active {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .menu-item {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .menu-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .menu-item-img {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .menu-item-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .menu-item:hover .menu-item-img img {
+        transform: scale(1.1);
+      }
+
+      .menu-item-content {
+        padding: 1.5rem;
+      }
+
+      .menu-item-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+
+      .menu-item-title {
+        font-size: 1.3rem;
+        color: var(--brown);
+      }
+
+      .menu-item-price {
+        font-weight: 700;
+        color: var(--secondary);
+        font-size: 1.2rem;
+      }
+
+      .menu-item-desc {
+        color: #666;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+      }
+
+      .add-to-cart {
+        display: inline-block;
+        padding: 0.5rem 1.5rem;
+        background-color: var(--primary);
+        color: var(--dark);
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .add-to-cart:hover {
+        background-color: var(--dark);
+        color: white;
+      }
+
+      /* Order Section */
+      .order {
+        background: linear-gradient(
+            rgba(255, 255, 255, 0.9),
+            rgba(255, 255, 255, 0.9)
+          ),
+          url("https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80")
+            no-repeat center center/cover;
+      }
+
+      .order-container {
+        display: flex;
+        gap: 3rem;
+      }
+
+      .order-info {
+        flex: 1;
+      }
+
+      .order-info h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+      }
+
+      .order-info p {
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+        color: #555;
+      }
+
+      .delivery-partners {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .delivery-partner {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .delivery-partner:hover {
+        transform: translateY(-5px);
+      }
+
+      .delivery-partner img {
+        height: 30px;
+        width: auto;
+      }
+
+      .order-form {
+        flex: 1;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--dark);
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .form-group textarea {
+        height: 100px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--secondary);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .submit-btn:hover {
+        background-color: var(--dark);
+      }
+
+      /* Gallery Section */
+      .gallery {
+        text-align: center;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        height: 250px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.03);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-item-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-item:hover .gallery-item-overlay {
+        opacity: 1;
+      }
+
+      .gallery-item-overlay i {
+        color: white;
+        font-size: 2rem;
+      }
+
+      /* Lightbox */
+      .lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1001;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+      }
+
+      .lightbox-content img {
+        max-width: 100%;
+        max-height: 80vh;
+        display: block;
+        border-radius: 10px;
+      }
+
+      .close-lightbox {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        background-color: var(--light);
+      }
+
+      .testimonials-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 2rem;
+        padding-bottom: 2rem;
+        scrollbar-width: none; /* Firefox */
+      }
+
+      .testimonials-container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+
+      .testimonial {
+        min-width: 300px;
+        scroll-snap-align: start;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .testimonial.active {
+        cursor: grab;
+      }
+
+      .testimonial-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .testimonial-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 1rem;
+      }
+
+      .testimonial-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .testimonial-author {
+        flex: 1;
+      }
+
+      .testimonial-author h4 {
+        color: var(--dark);
+        margin-bottom: 0.2rem;
+      }
+
+      .testimonial-rating {
+        color: var(--primary);
+      }
+
+      .testimonial-text {
+        color: #555;
+        line-height: 1.6;
+        font-style: italic;
+      }
+
+      /* Contact Section */
+      .contact-container {
+        display: flex;
+        gap: 3rem;
+      }
+
+      .contact-info {
+        flex: 1;
+      }
+
+      .contact-info h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+      }
+
+      .contact-details {
+        margin-bottom: 2rem;
+      }
+
+      .contact-detail {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .contact-detail i {
+        width: 40px;
+        height: 40px;
+        background-color: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1rem;
+        color: var(--dark);
+      }
+
+      .contact-map {
+        height: 300px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .contact-map iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        background-color: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--dark);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .social-link:hover {
+        background-color: var(--secondary);
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      .contact-form {
+        flex: 1;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Footer */
+      .footer {
+        background-color: var(--dark);
+        color: white;
+        padding: 4rem 10% 2rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-column h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 2px;
+        background-color: var(--primary);
+        bottom: 0;
+        left: 0;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.8rem;
+      }
+
+      .footer-links a {
+        color: #ddd;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary);
+      }
+
+      .opening-hours p {
+        margin-bottom: 0.5rem;
+        color: #ddd;
+      }
+
+      .newsletter-form {
+        display: flex;
+        margin-top: 1rem;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        padding: 0.8rem;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .newsletter-form button {
+        padding: 0 1.5rem;
+        background-color: var(--primary);
+        color: var(--dark);
+        border: none;
+        border-radius: 0 5px 5px 0;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .newsletter-form button:hover {
+        background-color: var(--accent);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #aaa;
+        font-size: 0.9rem;
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .about-content,
+        .order-container,
+        .contact-container {
+          flex-direction: column;
+        }
+
+        .about-image {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+          .nav-links {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: var(--light);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            transform: translateY(-200%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            pointer-events: none;
+          }
+
+          .nav-links.active {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+          }
+
+          .hamburger {
+            display: block;
+          }
+        }
+
+        .nav-links li {
+          margin: 1rem 0;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 3.5rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        .section {
+          padding: 3rem 5%;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          width: 100%;
+          padding: 0 1rem;
+        }
+
+        .btn {
+          width: 100%;
+          text-align: center;
+        }
+
+        .section-title h2 {
+          font-size: 2.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        <img
+          src="https://img.icons8.com/color/48/waffle.png"
+          alt="Waffle Town Logo"
+        />
+        <h1>Waffle Town</h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#order">Order</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <h1>Welcome to Waffle Town</h1>
+      <p>Where Every Bite is Happiness</p>
+      <div class="cta-buttons">
+        <a href="#menu" class="btn btn-primary">View Menu</a>
+        <a href="#order" class="btn btn-secondary">Order Now</a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="section-title">
+        <h2>Our Story</h2>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Delicious Waffles Since 2015</h3>
+          <p>
+            Waffle Town was founded by two childhood friends with a passion for
+            creating the perfect waffle. What started as a small food truck has
+            grown into a beloved local destination for waffle lovers of all
+            ages.
+          </p>
+          <p>
+            We believe in using only the finest ingredients - organic flour,
+            free-range eggs, and real butter - to create waffles that are crispy
+            on the outside and fluffy on the inside. Every waffle is made to
+            order with love and attention to detail.
+          </p>
+          <p>
+            Our mission is simple: to bring joy to our community one waffle at a
+            time. Whether you're stopping by for breakfast, lunch, or just a
+            sweet treat, we promise an experience that will make you smile.
+          </p>
+        </div>
+        <div class="about-image">
+          <img
+            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+            alt="Waffle Town Shop"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section menu" id="menu">
+      <div class="section-title">
+        <h2>Our Menu</h2>
+      </div>
+      <div class="menu-tabs">
+        <button class="tab-btn active" data-category="classic">
+          Classic Waffles
+        </button>
+        <button class="tab-btn" data-category="custom">Custom Waffles</button>
+        <button class="tab-btn" data-category="savory">Savory Waffles</button>
+        <button class="tab-btn" data-category="drinks">Drinks</button>
+        <button class="tab-btn" data-category="desserts">Desserts</button>
+      </div>
+      <div class="menu-items">
+        <!-- Classic Waffles -->
+        <div class="menu-category active" id="classic">
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80"
+                alt="Classic Belgian Waffle"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Classic Belgian</h3>
+                <span class="menu-item-price">$8.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Our signature Belgian waffle with pearl sugar, served with
+                whipped cream and fresh berries.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1595535873420-a599195b3f4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                alt="Buttermilk Waffle"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Buttermilk Bliss</h3>
+                <span class="menu-item-price">$7.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Fluffy buttermilk waffle with a hint of vanilla, served with
+                maple syrup and butter.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80"
+                alt="Chocolate Waffle"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Chocolate Dream</h3>
+                <span class="menu-item-price">$9.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Rich chocolate waffle topped with chocolate sauce, whipped
+                cream, and chocolate shavings.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Waffles -->
+        <div class="menu-category" id="custom">
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2149&q=80"
+                alt="Berry Delight Waffle"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Berry Delight</h3>
+                <span class="menu-item-price">$10.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Fresh strawberries, blueberries, and raspberries with whipped
+                cream and berry compote.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1558584724-0e4d32ca55a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80"
+                alt="Banana Nut Waffle"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Banana Nut</h3>
+                <span class="menu-item-price">$9.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Sliced bananas, walnuts, caramel sauce, and a scoop of vanilla
+                ice cream.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                alt="Tropical Paradise Waffle"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Tropical Paradise</h3>
+                <span class="menu-item-price">$11.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Mango, pineapple, coconut flakes, and passion fruit drizzle on a
+                golden waffle.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Savory Waffles -->
+        <div class="menu-category" id="savory">
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2032&q=80"
+                alt="Chicken & Waffles"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Chicken & Waffles</h3>
+                <span class="menu-item-price">$12.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Crispy fried chicken on a savory waffle with maple syrup and hot
+                sauce.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80"
+                alt="Bacon Cheddar Waffle"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Bacon Cheddar</h3>
+                <span class="menu-item-price">$10.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Savory waffle with crispy bacon bits and melted cheddar cheese,
+                served with sour cream.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                alt="Avocado Toast Waffle"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Avocado Toast Waffle</h3>
+                <span class="menu-item-price">$11.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Savory waffle topped with smashed avocado, cherry tomatoes, feta
+                cheese, and poached egg.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Drinks -->
+        <div class="menu-category" id="drinks">
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                alt="Specialty Coffee"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Waffle Town Coffee</h3>
+                <span class="menu-item-price">$4.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Our signature blend with notes of caramel and chocolate.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+                alt="Fresh Juice"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Fresh Orange Juice</h3>
+                <span class="menu-item-price">$5.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Freshly squeezed orange juice, served chilled.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1551029506-0807df4e2031?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2113&q=80"
+                alt="Milkshake"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Waffle Milkshake</h3>
+                <span class="menu-item-price">$7.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Vanilla ice cream blended with pieces of our famous waffles.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desserts -->
+        <div class="menu-category" id="desserts">
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80"
+                alt="Waffle Sundae"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Waffle Sundae</h3>
+                <span class="menu-item-price">$8.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Warm waffle pieces with ice cream, chocolate sauce, and
+                sprinkles.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                alt="Waffle Cone"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Waffle Cone</h3>
+                <span class="menu-item-price">$5.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Freshly made waffle cone with two scoops of premium ice cream.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-img">
+              <img
+                src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+                alt="Chocolate Fondue"
+              />
+            </div>
+            <div class="menu-item-content">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Chocolate Fondue</h3>
+                <span class="menu-item-price">$12.99</span>
+              </div>
+              <p class="menu-item-desc">
+                Waffle pieces with melted chocolate fondue and assorted dippers.
+              </p>
+              <button class="add-to-cart">Add to Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Section -->
+    <section class="section order" id="order">
+      <div class="section-title">
+        <h2>Order Online</h2>
+      </div>
+      <div class="order-container">
+        <div class="order-info">
+          <h3>Enjoy Waffle Town at Home</h3>
+          <p>
+            Can't make it to our shop? No problem! We offer convenient delivery
+            and pickup options so you can enjoy our delicious waffles wherever
+            you are.
+          </p>
+          <p>
+            Place your order online and choose your preferred pickup time or
+            delivery option. Our waffles are carefully packaged to ensure they
+            arrive fresh and delicious.
+          </p>
+          <h4>Delivery Partners:</h4>
+          <div class="delivery-partners">
+            <div class="delivery-partner">
+              <img
+                src="images.png"
+                alt="Uber Eats"
+              />
+            </div>
+            <div class="delivery-partner">
+              <img
+                src="images (1).png"
+                alt="DoorDash"
+              />
+            </div>
+            <div class="delivery-partner">
+              <img
+                src="foodpanda.png"
+                alt="Foodpanda"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="order-form">
+          <h3>Place Your Order</h3>
+          <form>
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Your phone number"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Your email address"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="order-type">Order Type</label>
+              <select id="order-type" required>
+                <option value="">Select option</option>
+                <option value="pickup">Pickup</option>
+                <option value="delivery">Delivery</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="order-details">Order Details</label>
+              <textarea
+                id="order-details"
+                placeholder="List the items you'd like to order"
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit Order</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+      <div class="section-title">
+        <h2>Our Gallery</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2025&q=80"
+            alt="Waffle with berries"
+          />
+          <div class="gallery-item-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1558584724-0e4d32ca55a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80"
+            alt="Waffle with banana"
+          />
+          <div class="gallery-item-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2149&q=80"
+            alt="Waffle with fruits"
+          />
+          <div class="gallery-item-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2032&q=80"
+            alt="Chicken and waffles"
+          />
+          <div class="gallery-item-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80"
+            alt="Savory waffle"
+          />
+          <div class="gallery-item-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+            alt="Waffle shop interior"
+          />
+          <div class="gallery-item-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            alt="Coffee and waffle"
+          />
+          <div class="gallery-item-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+            alt="Chocolate fondue"
+          />
+          <div class="gallery-item-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+      <div class="lightbox-content">
+        <span class="close-lightbox">&times;</span>
+        <img src="" alt="Lightbox Image" />
+      </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="testimonials">
+      <div class="section-title">
+        <h2>Customer Reviews</h2>
+      </div>
+      <div class="testimonials-container">
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-img">
+              <img
+                src="https://randomuser.me/api/portraits/women/32.jpg"
+                alt="Sarah J."
+              />
+            </div>
+            <div class="testimonial-author">
+              <h4>Sarah J.</h4>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "The best waffles I've ever had! The Berry Delight is my absolute
+            favorite. The service is always friendly and the atmosphere is so
+            cozy. Waffle Town has become my weekend treat spot!"
+          </p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-img">
+              <img
+                src="https://randomuser.me/api/portraits/men/45.jpg"
+                alt="Michael T."
+              />
+            </div>
+            <div class="testimonial-author">
+              <h4>Michael T.</h4>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "The Chicken & Waffles here are incredible! Perfect balance of sweet
+            and savory. I also appreciate that they use high-quality
+            ingredients. Definitely worth the visit!"
+          </p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-img">
+              <img
+                src="https://randomuser.me/api/portraits/women/68.jpg"
+                alt="Emily R."
+              />
+            </div>
+            <div class="testimonial-author">
+              <h4>Emily R.</h4>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "I love bringing my kids here on Saturday mornings. The waffles are
+            always fresh and delicious, and the staff remembers our regular
+            order. The Chocolate Dream waffle is to die for!"
+          </p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-img">
+              <img
+                src="https://randomuser.me/api/portraits/men/22.jpg"
+                alt="David K."
+              />
+            </div>
+            <div class="testimonial-author">
+              <h4>David K.</h4>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "As a Belgian, I'm very particular about waffles, but Waffle Town's
+            Classic Belgian is authentic and delicious. The pearl sugar makes
+            all the difference. Truly excellent!"
+          </p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="testimonial-img">
+              <img
+                src="https://randomuser.me/api/portraits/women/53.jpg"
+                alt="Jennifer L."
+              />
+            </div>
+            <div class="testimonial-author">
+              <h4>Jennifer L.</h4>
+              <div class="testimonial-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "The Avocado Toast Waffle is such a creative twist on brunch! I
+            appreciate that they have savory options too. The coffee is
+            excellent as well. Highly recommend!"
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="section-title">
+        <h2>Visit Us</h2>
+      </div>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Come Say Hello</h3>
+          <div class="contact-details">
+            <div class="contact-detail">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>123 Sweet Street, Waffle District, WT 12345</span>
+            </div>
+            <div class="contact-detail">
+              <i class="fas fa-phone"></i>
+              <span>(555) 123-4567</span>
+            </div>
+            <div class="contact-detail">
+              <i class="fas fa-envelope"></i>
+              <span>hello@waffletown.com</span>
+            </div>
+            <div class="contact-detail">
+              <i class="fas fa-clock"></i>
+              <span>Open daily from 7:00 AM to 9:00 PM</span>
+            </div>
+          </div>
+          <div class="contact-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215209179035!2d-73.9878449241643!3d40.75798597138948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1689870149885!5m2!1sen!2sus"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" class="social-link"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3>Send Us a Message</h3>
+          <form>
+            <div class="form-group">
+              <label for="contact-name">Name</label>
+              <input
+                type="text"
+                id="contact-name"
+                placeholder="Your name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email</label>
+              <input
+                type="email"
+                id="contact-email"
+                placeholder="Your email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="contact-subject">Subject</label>
+              <input type="text" id="contact-subject" placeholder="Subject" />
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea
+                id="contact-message"
+                placeholder="Your message"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Waffle Town</h3>
+          <p>
+            Where Every Bite is Happiness. Serving delicious, handcrafted
+            waffles since 2015.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#order">Order Online</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Opening Hours</h3>
+          <div class="opening-hours">
+            <p><strong>Monday - Friday:</strong> 7:00 AM - 9:00 PM</p>
+            <p><strong>Saturday - Sunday:</strong> 8:00 AM - 10:00 PM</p>
+            <p><strong>Holidays:</strong> 8:00 AM - 8:00 PM</p>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Newsletter</h3>
+          <p>Subscribe to our newsletter for special offers and waffle news!</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your email address" required />
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2023 Waffle Town. All Rights Reserved. | Designed with ❤️ by
+          Waffle Lovers
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile Navigation
+      const hamburger = document.querySelector(".hamburger");
+      const navLinks = document.querySelector(".nav-links");
+      const navLinksItems = document.querySelectorAll(".nav-links li");
+
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        hamburger.classList.toggle("active");
+      });
+
+      navLinksItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          hamburger.classList.remove("active");
+        });
+      });
+
+      // Sticky Navbar on Scroll
+      window.addEventListener("scroll", () => {
+        const navbar = document.querySelector(".navbar");
+        navbar.classList.toggle("scrolled", window.scrollY > 0);
+      });
+
+      // Menu Tabs
+      const tabBtns = document.querySelectorAll(".tab-btn");
+      const menuCategories = document.querySelectorAll(".menu-category");
+
+      tabBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // Remove active class from all buttons and categories
+          tabBtns.forEach((btn) => btn.classList.remove("active"));
+          menuCategories.forEach((category) =>
+            category.classList.remove("active")
+          );
+
+          // Add active class to clicked button
+          btn.classList.add("active");
+
+          // Show corresponding category
+          const categoryId = btn.getAttribute("data-category");
+          document.getElementById(categoryId).classList.add("active");
+        });
+      });
+
+      // Gallery Lightbox
+      const galleryItems = document.querySelectorAll(".gallery-item");
+      const lightbox = document.querySelector(".lightbox");
+      const lightboxImg = document.querySelector(".lightbox-content img");
+      const closeLightbox = document.querySelector(".close-lightbox");
+
+      galleryItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          const imgSrc = item.querySelector("img").getAttribute("src");
+          lightboxImg.setAttribute("src", imgSrc);
+          lightbox.classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+      });
+
+      closeLightbox.addEventListener("click", () => {
+        lightbox.classList.remove("active");
+        document.body.style.overflow = "auto";
+      });
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      });
+
+      // Testimonials Slider
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      const slider = document.querySelector(".testimonials-container");
+
+      slider.addEventListener("mousedown", (e) => {
+        isDown = true;
+        slider.classList.add("active");
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+      });
+
+      slider.addEventListener("mouseleave", () => {
+        isDown = false;
+        slider.classList.remove("active");
+      });
+
+      slider.addEventListener("mouseup", () => {
+        isDown = false;
+        slider.classList.remove("active");
+      });
+
+      slider.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 2;
+        slider.scrollLeft = scrollLeft - walk;
+      });
+
+      // Smooth Scrolling for Anchor Links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Form Submission (placeholder)
+      const forms = document.querySelectorAll("form");
+      forms.forEach((form) => {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          alert(
+            "Thank you for your message! This is a demo form and no actual data will be submitted."
+          );
+          form.reset();
+        });
+      });
+
+      // Add to Cart Animation
+      const addToCartBtns = document.querySelectorAll(".add-to-cart");
+      addToCartBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          btn.textContent = "Added!";
+          btn.style.backgroundColor = "#06D6A0";
+          setTimeout(() => {
+            btn.textContent = "Add to Order";
+            btn.style.backgroundColor = "#FFD166";
+          }, 1500);
+        });
+      });
+
+      // Scroll Animation
+      const animateOnScroll = () => {
+        const elements = document.querySelectorAll(
+          ".about-content, .menu-item, .testimonial, .contact-container > div"
+        );
+
+        elements.forEach((element) => {
+          const elementPosition = element.getBoundingClientRect().top;
+          const screenPosition = window.innerHeight / 1.2;
+
+          if (elementPosition < screenPosition) {
+            element.style.opacity = "1";
+            element.style.transform = "translateY(0)";
+          }
+        });
+      };
+
+      // Set initial state for animated elements
+      document
+        .querySelectorAll(
+          ".about-content, .menu-item, .testimonial, .contact-container > div"
+        )
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(30px)";
+          el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        });
+
+      window.addEventListener("scroll", animateOnScroll);
+      window.addEventListener("load", animateOnScroll);
+    </script>
+  </body>
+</html>
